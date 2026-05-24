@@ -10,6 +10,8 @@ COPY . .
 
 EXPOSE 3000
 
+ENV PORT=3000
+
 RUN addgroup -S testapp && adduser -S testapp -G testapp
 
 USER testapp
