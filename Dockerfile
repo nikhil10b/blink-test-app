@@ -1,6 +1,8 @@
-FROM node:20-alpine AS builder
+FROM node:20-alpine
 
 WORKDIR /app
+
+RUN apk add --no-cache
 
 COPY package.json ./
 
@@ -8,15 +10,9 @@ RUN npm install
 
 COPY . .
 
-FROM node:20-alpine
+EXPOSE 3000
 
 RUN addgroup -S testapp && adduser -S testapp -G testapp
-
-WORKDIR /app
-
-COPY --from=builder /app /app
-
-EXPOSE 3000
 
 USER testapp
 
